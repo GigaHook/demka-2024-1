@@ -13,7 +13,7 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach(range(0, 9) as $i) {
+        foreach(range(0, 100) as $i) {
             User::first()->orders()->create([
                 'number' => Str::random(6),
                 'description' => fake()->text(),

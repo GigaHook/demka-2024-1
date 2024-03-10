@@ -26,11 +26,7 @@ class OrderController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        auth()->user()->orders()->create([
-            ...$request->all(),
-            'user_id' => auth()->user()->id,
-        ]);
-
+        auth()->user()->orders()->create($request->all());
         return to_route('orders.index');
     }
 

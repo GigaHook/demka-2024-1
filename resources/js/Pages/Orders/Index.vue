@@ -3,7 +3,10 @@
     <title>{{ $page.props.user?.admin ? 'Заявки' : 'Мои заявки' }}</title>
   </Head>
 
-  <v-data-table-virtual :items="orders.data">
+  <v-data-table :items="orders.data">
+    <template #header.ID/>
+    <template #item.ID/>
+
     <template #item.Статус="{ value, item }">
       <v-select
         v-if="$page.props.user?.admin"
@@ -30,7 +33,7 @@
         @click="$inertia.get(route('orders.create'))"
       />
     </template>
-  </v-data-table-virtual>
+  </v-data-table>
 </template>
 
 <script setup>

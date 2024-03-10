@@ -4,9 +4,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn() => to_route('auth.loginpage'));
-
 Route::middleware('guest')->group(function() {
+    Route::get('/', fn() => to_route('auth.loginpage'));
     Route::inertia('/login', 'Login')->name('auth.loginpage');
     Route::inertia('/register', 'Register')->name('auth.registerpage');
     Route::post('/login', [UserController::class, 'login'])->name('auth.login');
@@ -14,6 +13,7 @@ Route::middleware('guest')->group(function() {
 });
 
 Route::middleware('auth')->group(function() {
+    Route::get('/', fn() => to_route('orders.index'));
     Route::get('/logout', [UserController::class, 'logout'])->name('auth.logout');
     Route::controller(OrderController::class)->prefix('orders')->group(function() {
         Route::get('/', 'index')->name('orders.index');
